@@ -26,6 +26,31 @@ public class Ad {
 
     private LocalDateTime date;
 
+    private String code;
+
+
+    public Ad(){}
+    //A listázáshoz használt konstruktor
+    //
+        public Ad(Long id, String title, String description, int price, LocalDateTime date) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.date = date;
+    }
+
+    public Ad(Long id, String title, String description, int price, LocalDateTime date, String code) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.date = date;
+        this.code = code;
+    }
+
+
+
     @PrePersist
     protected void onCreate() {
         date = LocalDateTime.now();
@@ -68,4 +93,11 @@ public class Ad {
     }
 
 
+    public void setCode(String code) {
+        this.code=code;
+    }
+
+    public String  getCode() {
+        return this.code;
+    }
 }

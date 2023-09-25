@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class AdRepository {
@@ -23,6 +24,11 @@ public class AdRepository {
 
 
     public List<Ad> findAll() {
+        return em.createQuery("SELECT NEW Ad(a.id, a.title, a.description, a.price, a.date) FROM Ad a", Ad.class).getResultList();
+
+    }
+
+    public List<Ad> privateFind(){
         return em.createQuery("SELECT a FROM Ad a", Ad.class).getResultList();
     }
 
@@ -32,6 +38,27 @@ public class AdRepository {
                 .setParameter("minPrice", minPrice)
                 .setParameter("maxPrice", maxPrice)
                 .getResultList();
+    }
+
+    public Ad findById(Long id) {
+        return em.find(Ad.class, id);
+    }
+
+    @Transactional
+    public Ad updateById(Ad u){
+        Ad a = em.find(Ad.class,u.getId());
+        if(a==null){
+            return null;
+        }
+        else if(a.getCode().equals(u.getCode())){
+            a.setDescription(u.getDescription());
+            a.setPrice(u.getPrice());
+            a.setTitle(u.getTitle());
+            return a;
+        }
+        else {
+            return null;
+        }
     }
 
 
