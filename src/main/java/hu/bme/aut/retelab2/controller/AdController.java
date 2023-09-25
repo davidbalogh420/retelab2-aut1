@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpStatus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -70,6 +71,13 @@ public class AdController {
 
         }
 
+
+    }
+
+
+    @GetMapping("{tag}")
+    public List<Ad> listByTag(@PathVariable String tag){
+        return adRepository.findByTag(tag);
 
     }
 

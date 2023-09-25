@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,6 +60,15 @@ public class AdRepository {
         else {
             return null;
         }
+    }
+
+
+    public List<Ad> findByTag(String tag) {
+
+        String jpql = "SELECT a FROM Ad a WHERE :tag MEMBER OF a.tags";
+        return em.createQuery(jpql, Ad.class)
+                .setParameter("tag", tag)
+                .getResultList();
     }
 
 

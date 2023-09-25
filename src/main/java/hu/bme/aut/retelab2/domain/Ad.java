@@ -1,12 +1,14 @@
 package hu.bme.aut.retelab2.domain;
 
+import org.hibernate.validator.internal.util.logging.formatter.ArrayOfClassesObjectFormatter;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 
 @Entity
@@ -28,6 +30,8 @@ public class Ad {
 
     private String code;
 
+    @ElementCollection
+    private ArrayList<String> tags = new ArrayList<>();
 
     public Ad(){}
     //A listázáshoz használt konstruktor
