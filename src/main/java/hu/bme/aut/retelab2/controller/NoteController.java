@@ -20,6 +20,7 @@ public class NoteController {
         return keyword.equals("") ? noteRepository.findAll() : noteRepository.findByKeyword(keyword);
     }
 
+
     @GetMapping("{id}")
     public ResponseEntity<Note> getById(@PathVariable long id) {
         Note note = noteRepository.findById(id);

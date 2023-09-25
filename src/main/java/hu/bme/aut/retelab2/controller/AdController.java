@@ -1,12 +1,13 @@
 package hu.bme.aut.retelab2.controller;
 
 import hu.bme.aut.retelab2.domain.Ad;
+import hu.bme.aut.retelab2.domain.Note;
 import hu.bme.aut.retelab2.repository.AdRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/ads")
@@ -21,6 +22,22 @@ public class AdController {
         ad.setId(null);
         return adRepository.save(ad);
     }
+
+    @GetMapping
+    public List<Ad> getAll() {
+        return  adRepository.findAll();
+    }
+
+    @GetMapping("/filter")
+    public List<Ad> getAdsByPriceRange(
+            @RequestParam("minPrice") int minPrice,
+            @RequestParam("maxPrice") int maxPrice) {
+        return adRepository.findByPriceRange(minPrice, maxPrice);
+    }
+
+
+
+
 
 
 

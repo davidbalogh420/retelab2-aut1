@@ -2,13 +2,12 @@ package hu.bme.aut.retelab2.domain;
 
 import org.springframework.data.annotation.CreatedDate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Date;
+
+
 
 @Entity
 public class Ad {
