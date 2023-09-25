@@ -30,8 +30,8 @@ public class AdController {
 
     @GetMapping("/filter")
     public List<Ad> getAdsByPriceRange(
-            @RequestParam("minPrice") int minPrice,
-            @RequestParam("maxPrice") int maxPrice) {
+            @RequestParam(name = "minPrice", required = false, defaultValue = "0") int minPrice,
+            @RequestParam(name = "maxPrice", required = false, defaultValue = "10000000") int maxPrice) {
         return adRepository.findByPriceRange(minPrice, maxPrice);
     }
 
