@@ -3,6 +3,7 @@ package hu.bme.aut.retelab2.repository;
 import hu.bme.aut.retelab2.domain.Ad;
 import hu.bme.aut.retelab2.domain.Note;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,6 +71,13 @@ public class AdRepository {
                 .setParameter("tag", tag)
                 .getResultList();
     }
+
+    @Scheduled(fixedDelay= 6000)
+    @Transactional
+    public void deleteExpiredAds() {
+        em.createQuery("DELETE FROM Ad a WHERE a.exp > CURRENT_TIMESTAMP").executeUpdate();
+    }
+
 
 
 

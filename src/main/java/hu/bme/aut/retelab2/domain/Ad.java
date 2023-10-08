@@ -33,6 +33,17 @@ public class Ad {
     @ElementCollection
     private ArrayList<String> tags = new ArrayList<>();
 
+    private LocalDateTime exp;
+
+
+    public LocalDateTime getExp() {
+        return exp;
+    }
+
+    public void setExp(LocalDateTime exp) {
+        this.exp = exp;
+    }
+
     public Ad(){}
     //A listázáshoz használt konstruktor
     //
